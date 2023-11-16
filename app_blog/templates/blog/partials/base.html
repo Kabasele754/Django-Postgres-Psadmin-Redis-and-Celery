@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block tile %} {% endblock %}
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static  'blog/css/my_style.css' %}">
+
+{% block style %}{% endblock %}
+</head>
+<body>
+
+<!-- header debut -->
+{% include 'blog/partials/header.html' %}
+<!-- header fin -->
+{% block content %}
+
+{% endblock %}
+
+
+
+
+<script src="{% static 'blog/js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- add this line for show the modal sweetify-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.5/sweetalert2.all.min.js"></script>
+{% load sweetify %}
+{% sweetify %}
+
+
+
+ {% for message in messages  %}
+    {% if message.tags == 'success' %}
+         <script>
+
+             var m = "{{ message }}";
+             //     title,    message, icon
+             swal({
+                position: 'top-end',
+                title: m,
+                showConfirmButton: false,
+                 icon: 'success',
+                 timer: 1500
+                })
+
+
+         </script>
+
+    {% else %}
+         <script>
+             var m = "{{ message }}";
+             swal("Erreur !", m,"error")
+         </script>
+    {% endif %}
+{% endfor %}
+
+</body>
+</html>

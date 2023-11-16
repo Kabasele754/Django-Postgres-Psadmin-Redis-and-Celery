@@ -22,6 +22,8 @@ docker exec -it django_app sh
 Part#5
 # connect to psadmin
 http://localhost:5051/
+      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
       - DB_HOST=db
       - DB_NAME=devdb
       - DB_USER=devuser

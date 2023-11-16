@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # app
     'app_blog',
+    'sweetify',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
@@ -130,7 +132,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "static/"
+MEDIA_URL = "/media/"
+#  en local static
+STATIC_ROOT = (os.path.join(BASE_DIR,'static'),)
+
+MEDIA_ROOT = os.path.join(BASE_DIR/'media')
+
+#STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# possible options: 'sweetalert', 'sweetalert2' - default is 'sweetalert2'
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 # config celery
 

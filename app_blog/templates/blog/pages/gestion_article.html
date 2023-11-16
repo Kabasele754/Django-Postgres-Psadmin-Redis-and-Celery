@@ -1,0 +1,78 @@
+{% extends 'blog/partials/base_dashboard.html' %}
+{% load sweetify %}
+{% sweetify %}
+{% block content %}
+<!--  Col main qui prend titre, button et Tableau -->
+<div class="col">
+<!-- ==================== Row titre  et button -->
+<div class="row">
+<!-- ==================== col titre   -->
+    <div class="col">
+    <h1>Gestion Article</h1>
+</div>
+<!-- ==================== End col titre   -->
+<!-- ==================== col button-->
+    <div class="col">
+         <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fa-solid fa-plus fa-2x"></i>Ajouter Article</button>
+    </div>
+<!-- ==================== End col button-->
+</div>
+<!-- ====================== End  Row titre  et button  -->
+
+<!-- ==================== Row Tableau-->
+<div class="row mt-3">
+<!-- ==================== Col Tableau   -->
+<div class="col">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Create</th>
+      <th scope="col">Update</th>
+      <th scope="col">Publication</th>
+      <th scope="col">Description</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for article in articles %}
+    <tr>
+<!--        forloop.counter0-->
+      <th scope="row">{{ forloop.counter }}</th>
+      <td> <img class="img rounded-circle" width="50" src="{{ article.image.url }}"></td>
+      <td>{{ article.title|truncatechars:10}}</td>
+      <td>{{ article.create|date:"m-d-Y m:t:s" }}</td>
+      <td>{{article.update|date:"m-d-Y m:t:s"}}</td>
+
+        {% if article.publication == True %}
+        <td>Publier</td>
+         {% else %}
+        <td>No publier</td>
+         {% endif %}
+
+      <td>{{article.description|truncatechars:10}}</td>
+      <td>
+          <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{article.id}}" ><i class="fa fa-edit fa-1x"></i></a>
+          <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{article.id}}"><i class="fa fa-trash fa-1x"></i></a>
+      </td>
+    </tr>
+
+  {% include 'blog/pages/articles/edit.html' %}
+  {% include 'blog/pages/articles/delete.html' %}
+  {% endfor %}
+
+  </tbody>
+</table>
+</div>
+    </div>
+<!-- ==================== End Col Tableau -->
+    </div>
+<!-- ==================== End Row Tableau-->
+<!--  End Col main qui prend titre, button et Tableau -->
+
+
+
+{% endblock content %}
