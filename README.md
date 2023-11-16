@@ -78,10 +78,11 @@ add.delay(2, 2)
 ### Se connecter à psadmin en utilisant les paramètres spécifiés
 http://localhost:5051/
 
-``` - PGADMIN_DEFAULT_EMAIL=user@domain.com
-        - PGADMIN_DEFAULT_PASSWORD=SuperSecret
-        - DB_HOST=db
-        - DB_NAME=devdb
-        - DB_USER=devuser
-        - DB_PASS=devpass 
+``` 
+- PGADMIN_DEFAULT_EMAIL=user@domain.com
+- PGADMIN_DEFAULT_PASSWORD=SuperSecret
+- DB_HOST=db
+- DB_NAME=devdb
+- DB_USER=devuser
+- DB_PASS=devpass 
 ```
