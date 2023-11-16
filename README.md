@@ -50,7 +50,8 @@ Ce projet est une application web basée sur Django, utilisant Docker pour la ge
 ```
 
 ### Ouvrir un shell interactif dans le conteneur django_app
-```docker exec -it django_app sh
+```
+docker exec -it django_app sh
 ```
 
 ### Exécuter des tâches Celery pour ajouter 2 et 2 de manière asynchrone
