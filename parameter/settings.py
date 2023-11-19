@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # app
     'app_blog',
+    'app_task',
     'sweetify',
     'fontawesomefree',
 ]
@@ -143,13 +146,35 @@ MEDIA_ROOT = os.path.join(BASE_DIR/'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Email configuration
+EMAIL_HOST = config('EMAIL_HOST')  # 'smtp.gmail.com' #config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')  # 587 #config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config ('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+DISPLAY_NAME = "My task"
+
+
+
 # possible options: 'sweetalert', 'sweetalert2' - default is 'sweetalert2'
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
-# config celery
+# Configuration de Celery
+CELERY_TIMEZONE = "GMT"
+CELERY_BROKER_URL = 'redis://redis:6379'  # URL de connexion à Redis pour la file d'attente des tâches
+CELERY_RESULT_BACKEND = 'redis://redis:6379'  # URL de connexion à Redis pour stocker les résultats des tâches
 
-CELERY_BROKER_URL = "redis://redis:6379"
-CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_BEAT_SCHEDULE = {
+    'send-task-reminder-emails': {
+        'task': 'app_task.tasks.send_task_reminder_emails',
+        'schedule': crontab(minute=20, hour=2),  # Exécute la tâche tous les jours à minuit
+    },
+}
+
+
+# Configuration de Redis
+# Si vous utilisez d'autres fonctionnalités de Redis dans votre application, vous pouvez également définir la configuration pour Redis ici
+
 
 
 

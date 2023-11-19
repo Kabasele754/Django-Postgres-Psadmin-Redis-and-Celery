@@ -1,0 +1,18 @@
+
+{% extends 'blog/partials/base.html' %}
+
+{% block content %}
+
+<h1>Result Page</h1>
+    <hr />
+    {% if result %}
+    <h5>Task ID:{{result.id}} </h5>
+    <h5>Task ID: {{result.task_id}}</h5>
+    <h5>Task State: {% if result.result != none   %} <span class="btn btn-success">{{result.state}}</span>  {% else  %}   <span class="btn btn-danger">{{result.state}}</span> {% endif %}</h5>
+    <h5>Task State: {% if result.result != none %} <span class="btn btn-success">{{result.status}} </span>  {% else  %}  <span class="btn btn-danger">{{result.status}}</span>  {% endif %}</h5>
+
+    <h5>Result Value: {% if result.result != none   %} <span >{{result.result}}</span>  {% else  %}   <span >Aucun result</span> {% endif %}</
+    {% endif %}
+
+{% endblock %}
+
